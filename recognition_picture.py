@@ -13,7 +13,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 recognizer.read('trainner.yml')
 
-labels = {"nom_personne": 1}
+labels = {"name": 1}
 
 with open("labels.pickle", "rb") as f: #wb reading bytes, f : file
    og_labels= pickle.load(f)
@@ -37,17 +37,17 @@ def detect(gray, frame):
         accuracy.append(confidence)
         print(labels[id_],confidence)
         
-        # if confidence >= 70:     
+        if confidence >= 85:     
 
-        #     cv2.putText(frame, labels[id_], (x,y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2, cv2.LINE_AA)
+            cv2.putText(frame, labels[id_], (x,y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
-        # else:
-        #     cv2.putText(frame, "Inconnu", (x,y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2, cv2.LINE_AA)
+        else:
+            cv2.putText(frame, "Inconnu", (x,y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
         
     return frame
-# data-set/test/Elon/images (100).jpg
-image_path = 'data-set/train/Brad/2Q__ (5).jpg' 
+
+image_path = '' 
 image = cv2.imread(image_path)
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -57,7 +57,6 @@ canvas = detect(gray_cropped, image)
 
 cv2.imshow('Reconnaissance faciale', canvas)
 
-# print('max:' + str(np.max(accuracy)))
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
