@@ -163,24 +163,24 @@ def main():
     # define the window layout
     layout = [
               [sg.Image(filename='', key='image')],
-              [sg.Button('Reconnaitre un visage live cam', size=(20, 2), font='Helvetica 14'),
-              sg.Button('Reconnaitre un visage a partir d\'une image', size=(20, 2), font='Helvetica 14'),
-               sg.Button('Ajouter une personne', size=(20, 2), font='Any 14'),
+              [sg.Button('Webcam facial recognition', size=(20, 2), font='Helvetica 14'),
+              sg.Button('Pictrue facial recognition', size=(20, 2), font='Helvetica 14'),
+               sg.Button('Add a new person', size=(20, 2), font='Any 14'),
                sg.Button('Exit', size=(10, 2), font='Helvetica 14'), ]]
 
-    layout_2 = [[sg.Text('Veuillez intorduire le nom de la personne')], [sg.Input(key='-IN-')], [sg.Button('Ajouter', size=(10, 1), font='Any 14')]]
+    layout_2 = [[sg.Text('Give the person\'s name')], [sg.Input(key='-IN-')], [sg.Button('Add', size=(10, 1), font='Any 14')]]
     
-    layout_3 = [[sg.Text('Veuillez introduire l\'emplacement de l\'image (PATH) ou choisir une image', size=(53, 1))], [sg.Input(key='-IN-'), sg.FileBrowse('Choisir')], [sg.Button('Tester', size=(10, 1), font='Any 14')]]
+    layout_3 = [[sg.Text('PASTE IMAGE PATH OR BROWSE FOR AN IMAGE', size=(53, 1))], [sg.Input(key='-IN-'), sg.FileBrowse('Browse')], [sg.Button('Test', size=(10, 1), font='Any 14')]]
 
-    layout_4 = [[sg.Text('ERREUR ! Veuillez introduire l\'emplacement de l\' image(PATH)')], [sg.Button('OK', size=(10, 1), font='Any 14')]]
+    layout_4 = [[sg.Text('ERROR ! GIVE A VALID PATH TO AN IMAGE')], [sg.Button('OK', size=(10, 1), font='Any 14')]]
 
     
-    window = sg.Window('Reconnaissance faciale',
+    window = sg.Window('Facial recognition',
                        layout, location=(280, 160))
     
-    window_2 = sg.Window('Ajouter une nouvelle personne', layout_2)
+    window_2 = sg.Window('Add a new person', layout_2)
 
-    window_3 = sg.Window('Reconnaissance faciale a partir d\'une image', layout_3)
+    window_3 = sg.Window('Pictrue facial recognition', layout_3)
     window_4 = sg.Window('', layout_4)
     
 
@@ -196,15 +196,15 @@ def main():
             
             return
 
-        elif event == 'Reconnaitre un visage live cam':
+        elif event == 'Webcam facial recognition':
             recording = True
 
-        elif event == 'Reconnaitre un visage a partir d\'une image': 
+        elif event == 'Pictrue facial recognition': 
                 event, value = window_3.read() 
 
                 path = value['-IN-'] 
 
-                if event == 'Tester' and path != '':
+                if event == 'Test' and path != '':
                     try:
                         window_3.close()
                         canvas = image_uploader(path)
@@ -216,12 +216,12 @@ def main():
                             window_4.close()
                         
 
-        elif event == 'Ajouter une personne':
+        elif event == 'Add a new person':
             event, value = window_2.read()
             
             user = value['-IN-']
 
-            if event == 'Ajouter' and user != '':
+            if event == 'Add' and user != '':
                 dir = 'faces/'+str(value['-IN-'])
                 if not os.path.exists(dir):
                     os.mkdir(dir)
