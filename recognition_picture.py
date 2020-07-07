@@ -5,9 +5,7 @@ import numpy as np
 
 # Charger les classifiers (cascades)
 face_classifier = cv2.CascadeClassifier('HAAR/haarcascade_frontalface_default.xml')
-eye_classifier = cv2.CascadeClassifier('HAAR/haarcascade_eye.xml')
 
-accuracy = []
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 
@@ -26,10 +24,6 @@ def detect(gray, frame):
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255,0,0), 2) #(x,y) up left, (x+w, y+h) lower right
         roi_gray = gray[y:y+h, x:x+w] #region of intrest 
         roi_color = frame[y:y+h, x:x+w]
-
-        # eyes = eye_classifier.detectMultiScale(roi_gray, 1.7, 6)
-        # for (ex, ey, ew, eh) in eyes:
-        #     cv2.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (0, 255, 0), 2)
 
         id_, resultat = recognizer.predict(roi_gray)
         # print(resultat)
