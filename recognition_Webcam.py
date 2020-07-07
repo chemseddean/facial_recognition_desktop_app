@@ -1,11 +1,10 @@
 import cv2
 import pickle
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 # Charger les classifiers (cascades)
 face_classifier = cv2.CascadeClassifier('HAAR/haarcascade_frontalface_default.xml')
-eye_classifier = cv2.CascadeClassifier('HAAR/haarcascade_eye.xml')
 
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -20,7 +19,7 @@ with open("labels.pickle", "rb") as f: #wb reading bytes, f : file
    og_labels= pickle.load(f)
    labels = {v:k for k,v in og_labels.items()}
 
-# Defining a function that will do the detections
+# Defining a function that will do the detection
 def detect(gray, frame):
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
     for (x, y, w, h) in faces:
@@ -63,10 +62,6 @@ while True:
     if cv2.waitKey(1) & key == ord(' '):
         break
 
-plt.plot(accurancy)
-plt.ylabel('Accuracy')
-plt.xlabel('run time')
-plt.show()
 
 
 video_capture.release()
