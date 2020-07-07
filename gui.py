@@ -164,7 +164,7 @@ def main():
     layout = [
               [sg.Image(filename='', key='image')],
               [sg.Button('Webcam facial recognition', size=(20, 2), font='Helvetica 14'),
-              sg.Button('Pictrue facial recognition', size=(20, 2), font='Helvetica 14'),
+              sg.Button('Picture facial recognition', size=(20, 2), font='Helvetica 14'),
                sg.Button('Add a new person', size=(20, 2), font='Any 14'),
                sg.Button('Exit', size=(10, 2), font='Helvetica 14'), ]]
 
@@ -180,7 +180,7 @@ def main():
     
     window_2 = sg.Window('Add a new person', layout_2)
 
-    window_3 = sg.Window('Pictrue facial recognition', layout_3)
+    window_3 = sg.Window('Picture facial recognition', layout_3)
     window_4 = sg.Window('', layout_4)
     
 
@@ -199,7 +199,7 @@ def main():
         elif event == 'Webcam facial recognition':
             recording = True
 
-        elif event == 'Pictrue facial recognition': 
+        elif event == 'Picture facial recognition': 
                 event, value = window_3.read() 
 
                 path = value['-IN-'] 
